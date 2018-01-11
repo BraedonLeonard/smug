@@ -44,5 +44,13 @@ async def roll(dice: str):
     numRolls, limit = map(int, dice.split('d'))
     results = ', '.join(str(random.randint(1, limit)) for x in range(numRolls))
     await bot.say(results)
+    
+@bot.command()
+async def ping():
+    await bot.say("Pong!")
 
-bot.run()
+@bot.command()
+async def echo(*, message: str):
+    await bot.say(message)
+
+bot.run("NDAxMDU5MDUyMTMxNDUwODkw.DTk2cQ.Xw0N-jhlfp406gGQrcRi2lgNEpg")

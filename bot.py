@@ -31,6 +31,10 @@ async def on_ready():
         '''
     ))
 
+# load, unload, and reload are provided to aid in the development of the bot
+# A developer can write their changes, then reload the module they changed
+# without needing to restart the bot entirely by issuing `!reload <module>`
+
 async def load(extension_name: str):
     ''' loads an extension '''
     try:
@@ -51,9 +55,14 @@ async def unload(extension_name: str):
 
 async def reload(extension_name: str):
     ''' reloads an extension '''
+    # convenience function
     await unload(extension_name)
     await load(extension_name)
 
+# Adds load, unload, and reload as commands to the bot
+# The decorator is not applied when these functions are declared because
+# reload makes use of both load and unload, which it would not be able to do if
+# they were warpped by the decorator
 for command in (load, unload, reload):
     bot.command(hidden=True)(command)
 

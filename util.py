@@ -1,3 +1,5 @@
+import re
+
 '''Various helper functions used by the bot'''
 
 def static_vars(**kwargs):
@@ -7,3 +9,5 @@ def static_vars(**kwargs):
             setattr(func, k, kwargs[k])
         return func
     return decorate
+
+NdN = re.compile(r'\d+d\d+')

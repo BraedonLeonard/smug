@@ -15,6 +15,13 @@ class Commands():
 
     @commands.command()
     async def echo(self, *, message: str):
+        ''' echoes a message '''
+        await self.bot.say(message)
+
+    @commands.command(pass_context=True)
+    async def ninja(self, context, *, message: str):
+        ''' Like echo, but deletes the message that issued the command '''
+        await self.bot.delete_message(context.message)
         await self.bot.say(message)
 
     @commands.command()

@@ -31,6 +31,32 @@ async def on_ready():
         '''
     ))
 
+async def load(extension_name: str):
+    ''' loads an extension '''
+    try:
+        bot.load_extension(extension_name)
+    except Exception as error:
+        await bot.say(f'{type(error).__name__}\n{error}')
+        return
+    await bot.say(f'{extension_name} loaded')
+
+async def unload(extension_name: str):
+    ''' unloads an extension '''
+    try:
+        bot.unload_extension(extension_name)
+    except Exception as error:
+        await bot.say(f'{type(error).__name__}\n{error}')
+        return
+    await bot.say(f'{extension_name} unloaded')
+
+async def reload(extension_name: str):
+    ''' reloads an extension '''
+    await unload(extension_name)
+    await load(extension_name)
+
+for command in (load, unload, reload):
+    bot.command(hidden=True)(command)
+
 if __name__ == '__main__':
     for extension in startup_extensions:
         bot.load_extension(extension)

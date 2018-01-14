@@ -38,7 +38,7 @@ class Commands():
             return
         numRolls, limit = map(int, dice.split('d'))
         results = (str(random.randint(1, limit + 1)) for x in range(numRolls))
-        await self.bot.say(', '.join(results))
+        await self.bot.longSay(', '.join(results))
 
 def setup(bot):
     bot.add_cog(Commands(bot))

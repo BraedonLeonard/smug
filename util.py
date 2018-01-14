@@ -12,6 +12,6 @@ def static_vars(**kwargs):
 
 def markdownCodeBlock(text: str, language: str=''):
     ''' formats text as a markdown code block '''
-    return '\n'.join([f'```{language}'] + text.split('\n') + ['```'])
+    return f'```{language}\n' + text + '```'
 
 NdN = re.compile(r'\d+d\d+')

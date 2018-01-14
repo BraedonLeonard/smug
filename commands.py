@@ -1,9 +1,10 @@
 import random
 import re
 
-import util
-
+from pyfiglet import Figlet
 from discord.ext import commands
+
+import util
 
 class Commands():
     def __init__(self, bot):
@@ -23,6 +24,11 @@ class Commands():
         ''' Like echo, but deletes the message that issued the command '''
         await self.bot.delete_message(context.message)
         await self.bot.say(message)
+
+    @commands.command()
+    async def figlet(self, *, message: str):
+        ''' echoes a message with figlet '''
+        await self.bot.say(util.markdownCodeBlock(Figlet().renderText(message)))
 
     @commands.command()
     async def roll(self, dice: str='1d6'):

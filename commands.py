@@ -1,5 +1,6 @@
 import random
 import re
+import os
 
 from pyfiglet import Figlet
 from discord.ext import commands
@@ -24,6 +25,20 @@ class Commands():
         ''' Like echo, but deletes the message that issued the command '''
         await self.bot.delete_message(context.message)
         await self.bot.say(message)
+
+    @commands.command()
+    async def swapIcon(self):
+        '''
+        Changes the profile picture randomly. Uses the images found in the
+        directory specified in the config file.
+        '''
+        iconsDirectory = util.config['profile_picture_directory']
+        iconsPath = os.path.join(util.basePath, iconsDirectory)
+        items = (os.path.join(iconsPath, x) for x in os.listdir(iconsPath))
+        files = tuple(x for x in items if os.path.isfile(x))
+        with open(random.choice(files), 'rb') as iconFile:
+            await self.bot.edit_profile(avatar=iconFile.read())
+        await self.bot.say('Profile picture changed!')
 
     @commands.command()
     async def figlet(self, *, message: str):

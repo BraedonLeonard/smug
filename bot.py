@@ -3,6 +3,7 @@
 
 import logging
 import textwrap
+import os
 
 from discord.ext import commands
 import yaml
@@ -93,7 +94,7 @@ if __name__ == '__main__':
     for extension in startup_extensions:
         bot.load_extension(extension)
 
-    with open('config.yaml', 'r') as configFile:
+    with open(os.path.join(util.basePath, 'config.yaml'), 'r') as configFile:
         config = yaml.load(configFile)
 
     bot.run(config['token'])

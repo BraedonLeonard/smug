@@ -1,4 +1,5 @@
 import re
+import os
 
 ''' Various helper functions used by the bot '''
 
@@ -15,3 +16,5 @@ def markdownCodeBlock(text: str, language: str=''):
     return f'```{language}\n' + text + '```'
 
 NdN = re.compile(r'\d+d\d+')
+
+basePath = os.path.dirname(os.path.realpath(__file__))

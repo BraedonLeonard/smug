@@ -1,6 +1,8 @@
 import re
 import os
 
+import yaml
+
 ''' Various helper functions used by the bot '''
 
 def static_vars(**kwargs):
@@ -18,3 +20,6 @@ def markdownCodeBlock(text: str, language: str=''):
 NdN = re.compile(r'\d+d\d+')
 
 basePath = os.path.dirname(os.path.realpath(__file__))
+
+with open(os.path.join(basePath, 'config.yaml'), 'r') as configFile:
+    config = yaml.load(configFile)
